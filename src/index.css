@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(180deg, #ffd6ec 0%, #f7c8e5 35%, #d7b5d8 70%, #8c6685 100%);
+    color: #1e1b4b;
+    min-height: 100vh;
+  }
+
+  .font-script {
+    font-family: 'Great Vibes', cursive;
+  }
+
+  .font-dancing {
+    font-family: 'Dancing Script', cursive;
+  }
+}
+
+/* Master Background Utility */
+.bg-master-gradient {
+  background: linear-gradient(180deg, #ffd6ec 0%, #f7c8e5 35%, #d7b5d8 70%, #8c6685 100%);
+  background-attachment: fixed;
+}
+
+/* Master Light Card Style */
+.light-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(244, 114, 182, 0.3);
+  border-radius: 28px;
+  box-shadow: 0 10px 35px -5px rgba(244, 114, 182, 0.25), 0 0 20px rgba(255, 255, 255, 0.6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.light-card:hover {
+  box-shadow: 0 15px 40px -5px rgba(244, 114, 182, 0.4), 0 0 25px rgba(255, 255, 255, 0.8);
+}
+
+/* Glowing Master Typography */
+.text-glow-script {
+  text-shadow: 0 0 15px rgba(236, 72, 153, 0.4), 0 0 30px rgba(255, 255, 255, 0.8);
+}
+
+/* Float Animations */
+@keyframes cakeFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(1deg);
+  }
+}
+
+.animate-cake-float {
+  animation: cakeFloat 4s ease-in-out infinite;
+}
+
+@keyframes balloonSway {
+  0%, 100% {
+    transform: translateY(0px) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(3deg);
+  }
+}
+
+.animate-balloon-sway {
+  animation: balloonSway 3.5s ease-in-out infinite;
+}
+
+/* Surprise Box Shake Keyframes */
+@keyframes boxShake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  20% { transform: translateX(-6px) rotate(-3deg); }
+  40% { transform: translateX(6px) rotate(3deg); }
+  60% { transform: translateX(-4px) rotate(-2deg); }
+  80% { transform: translateX(4px) rotate(2deg); }
+}
+
+.animate-box-shake {
+  animation: boxShake 0.4s ease-in-out infinite;
+}
+
+/* Frame Emerging Keyframes */
+@keyframes frameRise {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-frame-rise {
+  animation: frameRise 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f7c8e5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(236, 72, 153, 0.5);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(236, 72, 153, 0.9);
+}
