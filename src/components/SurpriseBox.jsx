@@ -9,7 +9,11 @@ export const SurpriseBox = () => {
   const { photoUrl, isLoading } = useBirthdayConfig();
 
   const [phase, setPhase] = useState(() => {
-    return localStorage.getItem('sb_surprise_opened') === 'true' ? 'revealed' : 'unopened';
+    try {
+      return localStorage.getItem('sb_surprise_opened') === 'true' ? 'revealed' : 'unopened';
+    } catch (e) {
+      return 'unopened';
+    }
   });
 
   const [statusText, setStatusText] = useState("Something special is hiding inside...");
@@ -47,7 +51,9 @@ export const SurpriseBox = () => {
     // Step 5 & 6: Photo Frame & Message Reveal (3.8s+)
     setTimeout(() => {
       setPhase('revealed');
-      localStorage.setItem('sb_surprise_opened', 'true');
+      try {
+        localStorage.setItem('sb_surprise_opened', 'true');
+      } catch (e) {}
     }, 3800);
   };
 

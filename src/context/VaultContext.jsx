@@ -17,33 +17,53 @@ const ALL_FEATURES = [
 export const VaultProvider = ({ children }) => {
   // 1. Countdown Target (24 hours from initial visit)
   const [countdownTarget, setCountdownTarget] = useState(() => {
-    const saved = localStorage.getItem('bv_countdown_target');
-    if (saved) return parseInt(saved, 10);
+    try {
+      const saved = localStorage.getItem('bv_countdown_target');
+      if (saved) return parseInt(saved, 10);
+    } catch (e) {}
     const target = Date.now() + 24 * 60 * 60 * 1000;
-    localStorage.setItem('bv_countdown_target', target.toString());
+    try {
+      localStorage.setItem('bv_countdown_target', target.toString());
+    } catch (e) {}
     return target;
   });
 
   // 2. Countdown Complete State
   const [isCountdownComplete, setIsCountdownComplete] = useState(() => {
-    return localStorage.getItem('bv_countdown_complete') === 'true';
+    try {
+      return localStorage.getItem('bv_countdown_complete') === 'true';
+    } catch (e) {
+      return false;
+    }
   });
 
   // 3. Visited / Completed Features
   const [visitedFeatures, setVisitedFeatures] = useState(() => {
-    const saved = localStorage.getItem('bv_visited_features');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem('bv_visited_features');
+      return saved ? JSON.parse(saved) : [];
+    } catch (e) {
+      return [];
+    }
   });
 
   // 4. Sound Toggle
   const [soundEnabled, setSoundEnabled] = useState(() => {
-    const saved = localStorage.getItem('bv_sound_enabled');
-    return saved === null ? true : saved === 'true';
+    try {
+      const saved = localStorage.getItem('bv_sound_enabled');
+      return saved === null ? true : saved === 'true';
+    } catch (e) {
+      return true;
+    }
   });
 
   // 5. Custom Name
   const [cousinName, setCousinName] = useState(() => {
-    return localStorage.getItem('bv_cousin_name') || 'Bestie Cousin';
+    try {
+      return localStorage.getItem('bv_cousin_name') || 'Bestie Cousin';
+    } catch (e) {
+      return 'Bestie Cousin';
+    }
   });
 
   // Toast notification state
@@ -52,17 +72,23 @@ export const VaultProvider = ({ children }) => {
   // Sync sound synthesizer state
   useEffect(() => {
     sounds.setSoundEnabled(soundEnabled);
-    localStorage.setItem('bv_sound_enabled', soundEnabled.toString());
+    try {
+      localStorage.setItem('bv_sound_enabled', soundEnabled.toString());
+    } catch (e) {}
   }, [soundEnabled]);
 
   // Sync visited features
   useEffect(() => {
-    localStorage.setItem('bv_visited_features', JSON.stringify(visitedFeatures));
+    try {
+      localStorage.setItem('bv_visited_features', JSON.stringify(visitedFeatures));
+    } catch (e) {}
   }, [visitedFeatures]);
 
   // Sync cousin name
   useEffect(() => {
-    localStorage.setItem('bv_cousin_name', cousinName);
+    try {
+      localStorage.setItem('bv_cousin_name', cousinName);
+    } catch (e) {}
   }, [cousinName]);
 
   // Helper: check if a feature card is unlocked
